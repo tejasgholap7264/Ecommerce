@@ -3,7 +3,8 @@ package com.ecommerce.sb_ecom.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+
+import java.util.List;
 
 @Entity(name = "categories")
 public class Category {
@@ -16,12 +17,16 @@ public class Category {
     @Size(min = 2, max = 20)
     private String categoryName;
 
-    public Category(String categoryName, Long categoryId) {
-        this.categoryName = categoryName;
-        this.categoryId = categoryId;
-    }
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> product;
 
     public Category() {
+    }
+
+    public Category(Long categoryId, String categoryName, List<Product> product) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.product = product;
     }
 
     public Long getCategoryId() {
@@ -38,5 +43,13 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public List<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(List<Product> product) {
+        this.product = product;
     }
 }
