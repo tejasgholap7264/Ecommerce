@@ -28,19 +28,24 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private User user;
+
     public Product() {
     }
 
-    public Product(Category category, double specialPrice, double discount, double price, Integer quantity, String description, String image, String productName, Long productId) {
-        this.category = category;
-        this.specialPrice = specialPrice;
-        this.discount = discount;
-        this.price = price;
-        this.quantity = quantity;
-        this.description = description;
-        this.image = image;
-        this.productName = productName;
+    public Product(Long productId, String productName, String image, String description, Integer quantity, double price, double discount, double specialPrice, Category category, User user) {
         this.productId = productId;
+        this.productName = productName;
+        this.image = image;
+        this.description = description;
+        this.quantity = quantity;
+        this.price = price;
+        this.discount = discount;
+        this.specialPrice = specialPrice;
+        this.category = category;
+        this.user = user;
     }
 
     public Long getProductId() {
@@ -113,5 +118,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

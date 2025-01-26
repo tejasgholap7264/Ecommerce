@@ -1,7 +1,6 @@
 package com.ecommerce.sb_ecom.controller;
 
 import com.ecommerce.sb_ecom.config.AppConstants;
-import com.ecommerce.sb_ecom.model.Category;
 import com.ecommerce.sb_ecom.payloads.CategoryDTO;
 import com.ecommerce.sb_ecom.payloads.CategoryResponse;
 import com.ecommerce.sb_ecom.service.CategorySerice;
@@ -9,8 +8,6 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/")
