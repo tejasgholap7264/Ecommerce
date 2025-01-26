@@ -12,4 +12,5 @@ public interface ProductRepo extends JpaRepository<Product, Integer> {
     Page<Product> findByCategoryOrderByPriceAsc(Category category, Pageable pageDetails);
 
     Page<Product> findByProductNameLikeIgnoreCase(String s, Pageable pageDetails);
+
 }

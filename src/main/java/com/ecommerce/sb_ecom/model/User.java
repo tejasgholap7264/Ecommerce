@@ -53,6 +53,9 @@ public class User {
             orphanRemoval = true)
     private Set<Product> products;
 
+    @OneToOne(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Cart cart;
+
     public User() {
     }
 
@@ -62,7 +65,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long userId, String userName, String email, String password, Set<Role> roles, List<Address> addresses, Set<Product> products) {
+    public User(Long userId, String userName, String email, String password, Set<Role> roles, List<Address> addresses, Set<Product> products, Cart cart) {
         this.userId = userId;
         this.userName = userName;
         this.email = email;
@@ -70,6 +73,7 @@ public class User {
         this.roles = roles;
         this.addresses = addresses;
         this.products = products;
+        this.cart=cart;
     }
 
     public Long getUserId() {
@@ -126,5 +130,13 @@ public class User {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

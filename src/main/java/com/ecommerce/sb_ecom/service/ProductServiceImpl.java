@@ -2,10 +2,13 @@ package com.ecommerce.sb_ecom.service;
 
 import com.ecommerce.sb_ecom.exceptions.APIException;
 import com.ecommerce.sb_ecom.exceptions.ResourceNotFoundException;
+import com.ecommerce.sb_ecom.model.Cart;
 import com.ecommerce.sb_ecom.model.Category;
 import com.ecommerce.sb_ecom.model.Product;
+import com.ecommerce.sb_ecom.payloads.CartDTO;
 import com.ecommerce.sb_ecom.payloads.ProductDTO;
 import com.ecommerce.sb_ecom.payloads.ProductResponse;
+import com.ecommerce.sb_ecom.repositories.CartRepo;
 import com.ecommerce.sb_ecom.repositories.CategoryRepo;
 import com.ecommerce.sb_ecom.repositories.ProductRepo;
 import org.modelmapper.ModelMapper;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -38,6 +42,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Value("${project.image}")
     private String path;
+
+    @Autowired
+    private CartRepo cartRepo;
+
+    @Autowired
+    private CartService cartService;
 
     @Override
     public ProductDTO addProduct(ProductDTO productDTO, Long categoryId) {
@@ -173,6 +183,22 @@ public class ProductServiceImpl implements ProductService {
         productFromDb.setSpecialPrice(specailPrice);
 
         Product savedProduct = productRepo.save(productFromDb);
+
+        List<Cart> carts = cartRepo.findCartsByProductId(productId);
+
+        List<CartDTO> cartDTOs = carts.stream().map(cart -> {
+            CartDTO cartDTO = modelMapper.map(cart, CartDTO.class);
+
+            List<ProductDTO> products = cart.getCartItems().stream()
+                    .map(p -> modelMapper.map(p.getProduct(), ProductDTO.class)).collect(Collectors.toList());
+
+            cartDTO.setProducts(products);
+
+            return cartDTO;
+
+        }).toList();
+
+        cartDTOs.forEach(cart -> cartService.updateProductInCarts(cart.getCartId(), productId));
 
         return modelMapper.map(savedProduct, ProductDTO.class);
     }
