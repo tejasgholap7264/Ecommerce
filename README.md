@@ -122,4 +122,3 @@ The product module supports:
 - Implementing a recommendation engine for personalized user experiences.
 - Adding support for multi-language localization.
 
----
