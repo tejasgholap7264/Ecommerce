@@ -5,18 +5,17 @@ import com.ecommerce.sb_ecom.payloads.CategoryDTO;
 import com.ecommerce.sb_ecom.payloads.CategoryResponse;
 import com.ecommerce.sb_ecom.service.CategorySerice;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/")
+@AllArgsConstructor
 public class CategoryController {
 
     private final CategorySerice categorySerice;
-    public CategoryController(CategorySerice categorySerice) {
-        this.categorySerice = categorySerice;
-    }
 
     @PostMapping("admin/categories")
     public ResponseEntity<CategoryDTO> addCategory(@Valid @RequestBody CategoryDTO categoryDTO) {

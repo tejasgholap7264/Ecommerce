@@ -5,6 +5,7 @@ import com.ecommerce.sb_ecom.payloads.ProductDTO;
 import com.ecommerce.sb_ecom.payloads.ProductResponse;
 import com.ecommerce.sb_ecom.service.ProductService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,9 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("api/")
+@AllArgsConstructor
 public class ProductController {
 
-    @Autowired
     private ProductService productService;
 
     @PostMapping("admin/categories/{categoryId}/product")

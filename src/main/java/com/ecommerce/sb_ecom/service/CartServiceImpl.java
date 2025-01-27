@@ -12,6 +12,7 @@ import com.ecommerce.sb_ecom.repositories.CartRepo;
 import com.ecommerce.sb_ecom.repositories.ProductRepo;
 import com.ecommerce.sb_ecom.util.AuthUtil;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,20 +22,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
+@AllArgsConstructor
 public class CartServiceImpl implements CartService{
-    @Autowired
+
     private CartRepo cartRepository;
-
-    @Autowired
     private AuthUtil authUtil;
-
-    @Autowired
     ProductRepo productRepository;
-
-    @Autowired
     CartItemRepo cartItemRepository;
-
-    @Autowired
     ModelMapper modelMapper;
 
     @Override

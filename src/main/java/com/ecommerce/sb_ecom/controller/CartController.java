@@ -5,6 +5,7 @@ import com.ecommerce.sb_ecom.payloads.CartDTO;
 import com.ecommerce.sb_ecom.repositories.CartRepo;
 import com.ecommerce.sb_ecom.service.CartService;
 import com.ecommerce.sb_ecom.util.AuthUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class CartController {
 
     private final CartRepo cartRepository;
@@ -21,12 +23,6 @@ public class CartController {
     private final AuthUtil authUtil;
 
     private final CartService cartService;
-
-    public CartController(CartRepo cartRepository, AuthUtil authUtil, CartService cartService) {
-        this.cartRepository = cartRepository;
-        this.authUtil = authUtil;
-        this.cartService = cartService;
-    }
 
     @PostMapping("/carts/products/{productId}/quantity/{quantity}")
     public ResponseEntity<CartDTO> addProductToCart(@PathVariable Long productId,

@@ -7,6 +7,7 @@ import com.ecommerce.sb_ecom.model.User;
 import com.ecommerce.sb_ecom.payloads.AddressDTO;
 import com.ecommerce.sb_ecom.repositories.AddressRepo;
 import com.ecommerce.sb_ecom.repositories.UserRepo;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,14 +15,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AddressServiceImpl implements AddressService{
-    @Autowired
+
     private AddressRepo addressRepository;
-
-    @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
     UserRepo userRepository;
 
     @Override

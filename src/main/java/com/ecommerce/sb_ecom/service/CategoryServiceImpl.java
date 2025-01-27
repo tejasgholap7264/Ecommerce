@@ -6,6 +6,7 @@ import com.ecommerce.sb_ecom.model.Category;
 import com.ecommerce.sb_ecom.payloads.CategoryDTO;
 import com.ecommerce.sb_ecom.payloads.CategoryResponse;
 import com.ecommerce.sb_ecom.repositories.CategoryRepo;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -16,15 +17,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class CategoryServiceImpl implements CategorySerice{
 
     private final CategoryRepo categoryRepo;
     private ModelMapper modelMapper;
-
-    public CategoryServiceImpl(CategoryRepo categoryRepo, ModelMapper modelMapper) {
-        this.categoryRepo = categoryRepo;
-        this.modelMapper = modelMapper;
-    }
 
     @Override
     public CategoryDTO addCategory(CategoryDTO categoryDTO) {

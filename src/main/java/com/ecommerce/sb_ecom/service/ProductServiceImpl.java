@@ -11,6 +11,7 @@ import com.ecommerce.sb_ecom.payloads.ProductResponse;
 import com.ecommerce.sb_ecom.repositories.CartRepo;
 import com.ecommerce.sb_ecom.repositories.CategoryRepo;
 import com.ecommerce.sb_ecom.repositories.ProductRepo;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,26 +29,24 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
     private ProductRepo productRepo;
-
-    @Autowired
     private CategoryRepo categoryRepo;
-
-    @Autowired
     private ModelMapper modelMapper;
-
-    @Autowired
     private FileService fileService;
+    private CartRepo cartRepo;
+    private CartService cartService;
+
+    public ProductServiceImpl(ProductRepo productRepo, CategoryRepo categoryRepo, ModelMapper modelMapper, FileService fileService, CartRepo cartRepo, CartService cartService) {
+        this.productRepo = productRepo;
+        this.categoryRepo = categoryRepo;
+        this.modelMapper = modelMapper;
+        this.fileService = fileService;
+        this.cartRepo = cartRepo;
+        this.cartService = cartService;
+    }
 
     @Value("${project.image}")
     private String path;
-
-    @Autowired
-    private CartRepo cartRepo;
-
-    @Autowired
-    private CartService cartService;
 
     @Override
     public ProductDTO addProduct(ProductDTO productDTO, Long categoryId) {

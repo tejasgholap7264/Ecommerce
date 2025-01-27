@@ -7,6 +7,7 @@ import com.ecommerce.sb_ecom.payloads.OrderDTO;
 import com.ecommerce.sb_ecom.payloads.OrderItemDTO;
 import com.ecommerce.sb_ecom.repositories.*;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,30 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
     CartRepo cartRepository;
-
-    @Autowired
     AddressRepo addressRepository;
-
-    @Autowired
     OrderItemRepo orderItemRepository;
-
-    @Autowired
     OrderRepo orderRepository;
-
-    @Autowired
     PaymentRepo paymentRepository;
-
-    @Autowired
     CartService cartService;
-
-    @Autowired
     ModelMapper modelMapper;
-
-    @Autowired
     ProductRepo productRepository;
 
     @Override

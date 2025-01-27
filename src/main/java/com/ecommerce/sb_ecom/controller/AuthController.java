@@ -13,6 +13,7 @@ import com.ecommerce.sb_ecom.security.response.MessageResponse;
 import com.ecommerce.sb_ecom.security.response.UserInfoResponse;
 import com.ecommerce.sb_ecom.security.service.UserDetailsImpl;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -30,6 +31,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class AuthController {
 
     private JwtUtils jwtUtils;
@@ -37,14 +39,6 @@ public class AuthController {
     UserRepo userRepo;
     RoleRepo roleRepo;
     PasswordEncoder passwordEncoder;
-
-    public AuthController(AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserRepo userRepo, RoleRepo roleRepo, PasswordEncoder passwordEncoder) {
-        this.authenticationManager = authenticationManager;
-        this.jwtUtils = jwtUtils;
-        this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {

@@ -4,6 +4,7 @@ import com.ecommerce.sb_ecom.payloads.OrderDTO;
 import com.ecommerce.sb_ecom.payloads.OrderRequestDTO;
 import com.ecommerce.sb_ecom.service.OrderService;
 import com.ecommerce.sb_ecom.util.AuthUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@AllArgsConstructor
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
 
-    @Autowired
     private AuthUtil authUtil;
 
     @PostMapping("/order/users/payments/{paymentMethod}")

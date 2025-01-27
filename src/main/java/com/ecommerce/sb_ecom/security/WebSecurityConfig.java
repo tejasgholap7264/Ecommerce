@@ -10,6 +10,7 @@ import com.ecommerce.sb_ecom.security.jwt.AuthEntryPointJwt;
 import com.ecommerce.sb_ecom.security.jwt.AuthTokenFilter;
 import com.ecommerce.sb_ecom.security.jwt.JwtUtils;
 import com.ecommerce.sb_ecom.security.service.UserDetailsServiceImpl;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +30,7 @@ import java.util.Set;
 
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity
+@AllArgsConstructor
 public class WebSecurityConfig {
 
     UserDetailsServiceImpl userDetailsService;
@@ -37,12 +38,6 @@ public class WebSecurityConfig {
     private final AuthEntryPointJwt unauthorizedHandler;
 
     private final JwtUtils jwtUtils;
-
-    public WebSecurityConfig(UserDetailsServiceImpl userDetailsService, AuthEntryPointJwt unauthorizedHandler, JwtUtils jwtUtils) {
-        this.userDetailsService = userDetailsService;
-        this.unauthorizedHandler = unauthorizedHandler;
-        this.jwtUtils = jwtUtils;
-    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
